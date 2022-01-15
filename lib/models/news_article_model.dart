@@ -16,11 +16,11 @@ class NewsArticleModel {
 
   factory NewsArticleModel.fromJson(Map<String, dynamic> json) {
     return NewsArticleModel(
-        title: json['title'],
-        description: json['description'],
-        originalArticleUrl: json['url'],
-        articleImageUrl: json['urlToImage'],
+        title: json['title'] ?? '',
+        description: json['description'] ?? '',
+        originalArticleUrl: json['url'] ?? '',
+        articleImageUrl: json['urlToImage'] ?? '',
         publishDate: DateFormat("dd-MM-yyyy")
-            .format(DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(json['publishedAt'])));
+            .format(DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(json['publishedAt'] ?? '')));
   }
 }

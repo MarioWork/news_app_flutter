@@ -27,8 +27,14 @@ class _NewsFeedScreenState extends State<NewsFeedScreen> {
         future: _setupArticles(),
         builder: (context, future) {
           if (!future.hasData) {
-            return const CircularProgressIndicator(
-              color: Colors.redAccent,
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                CircularProgressIndicator(
+                  color: Colors.redAccent,
+                ),
+              ],
             );
           } else {
             List<NewsArticleModel>? list = future.data;
