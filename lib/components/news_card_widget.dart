@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/models/news_article_model.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'custom_progress_indicator_widget.dart';
+
 class NewsCardWidget extends StatefulWidget {
   final NewsArticleModel article;
 
@@ -32,34 +34,36 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
                 imageUrl: widget.article.articleImageUrl,
                 height: 250,
                 width: double.infinity,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const SizedBox(
-                    height: 200,
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.redAccent,
-                    ))),
+                fit: BoxFit.fill,
+                placeholder: (context, url) => const CustomProgressIndicatorWidget(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              Padding(
+               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.article.title,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
+                child: SizedBox(
+                  height: 60,
+                  child: Text(
+                    widget.article.title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(child: Text(widget.article.publishDate)),
+                    Expanded(child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0,0,0,5),
+                      child: Text(widget.article.publishDate),
+                    )),
                     SizedBox(
                       height: 20,
                       child: IconButton(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                        iconSize: 20,
+                        iconSize: 15,
                         onPressed: () {
                           Share.share(widget.article.originalArticleUrl,
                               subject: widget.article.title);
