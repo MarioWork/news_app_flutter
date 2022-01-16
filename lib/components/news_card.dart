@@ -15,15 +15,11 @@ class NewsCardWidget extends StatefulWidget {
 }
 
 class _NewsCardWidgetState extends State<NewsCardWidget> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 370,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -32,16 +28,16 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
             children: [
               CachedNetworkImage(
                 imageUrl: widget.article.articleImageUrl,
-                height: 250,
                 width: double.infinity,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => const CustomProgressIndicatorWidget(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.contain,
+                placeholder: (context, url) => const SizedBox(
+                    height: 150, child: CustomProgressIndicatorWidget()),
+                errorWidget: (context, url, error) =>
+                    const SizedBox(child: Icon(Icons.error), height: 150),
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 60,
                   child: Text(
                     widget.article.title,
                     maxLines: 3,
@@ -51,12 +47,13 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0,0,0,5),
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                       child: Text(widget.article.publishDate),
                     )),
                     SizedBox(
@@ -83,5 +80,4 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
       ),
     );
   }
-
 }

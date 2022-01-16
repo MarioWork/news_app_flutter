@@ -67,23 +67,52 @@ class _NewsFeedScreenState extends State<NewsFeedScreen> {
             _pagingController.refresh();
           });
         }),
-        body: PagedListView<int, NewsArticleModel>(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<NewsArticleModel>(
-              itemBuilder: (context, item, index) =>
-                  NewsCardWidget(article: item), //Create Card for each item
-              firstPageProgressIndicatorBuilder: (_) => //First page Loading
-                  const CustomProgressIndicatorWidget(),
-              newPageProgressIndicatorBuilder: (_) => const Padding(
-                    //Loading a new page
-                    padding: EdgeInsets.all(8.0),
-                    child: CustomProgressIndicatorWidget(),
-                  ),
-              noMoreItemsIndicatorBuilder: (_) => const Padding(
-                    //When there is no more items to display
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(child: Text('No more articles to show')),
-                  )),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                    Chip(label: Text('Technology')),
+                    SizedBox(width: 5,),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: PagedListView<int, NewsArticleModel>(
+                pagingController: _pagingController,
+                builderDelegate: PagedChildBuilderDelegate<NewsArticleModel>(
+                    itemBuilder: (context, item, index) =>
+                        NewsCardWidget(article: item), //Create Card for each item
+                    firstPageProgressIndicatorBuilder: (_) => //First page Loading
+                        const CustomProgressIndicatorWidget(),
+                    newPageProgressIndicatorBuilder: (_) => const Padding(
+                          //Loading a new page
+                          padding: EdgeInsets.all(8.0),
+                          child: CustomProgressIndicatorWidget(),
+                        ),
+                    noMoreItemsIndicatorBuilder: (_) => const Padding(
+                          //When there is no more items to display
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(child: Text('No more articles to show')),
+                        )),
+              ),
+            ),
+          ],
         ));
   }
 }
