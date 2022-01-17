@@ -50,6 +50,8 @@ flutter_icons:
   adaptive_icon_foreground: "assets/images/logo_foreground.png"
 
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
